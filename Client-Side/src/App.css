@@ -1,0 +1,149 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* .navbar-brand{
+  background-color: black;
+} */
+
+
+/*
+LOG IN CSS
+*/
+
+#username_label input{
+  margin-bottom: 10px;
+}
+#password_label input{
+  margin-bottom: 10px;
+}
+.login_class{
+  background-color: beige;
+  font-size: 20px;
+  box-sizing: border-box;
+  background-image: url("./resources/login.png");
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.login_div #login_form label{
+  color: white;
+}
+.login_div #login_form #username_label{
+  margin-right: 35px;
+}
+
+
+.login_class button{
+  margin: 5px;
+  border-radius: 5px;
+  /* font-size: 20px; */
+}
+/* button:hover{
+  background-color: 	#1E90FF;
+  color:white;
+} */
+
+
+/*
+delete button for admin menu
+
+**/
+.delete_user_button{
+  background-color: transparent;
+  color:white;
+   /* style={{backgroundColor:"transparent",color:"red"}} */
+}
+.delete_user_button:hover{
+  background-color:red;
+}
+
+.approved{
+  background-color:lime;
+}
+.denied{
+  background-color:red;
+}
+.columnWidth{
+  width: 50px;
+}
+
+
+/*
+  finance manager hover table
+*/
+.mytable{
+  color:white;
+}
+.outer_div{
+  height: 100vh;
+}
+
+.nav_div{
+  height: 94.3%;
+  display: flex;
+  flex-flow: row nowrap;
+  background-image: url("./resources/forest.jpg");
+}
+.inner_div{
+  height: 100%;
+}
+.ticket_form_image{
+  color:white;
+  height: 94.3%;
+  display: flex;
+  flex-flow: row nowrap;
+  background-image: url("./resources/newticket_image.jpg");
+}
+.new_ticket_form{
+  /* align-items: center; */
+  justify-content: center;
+  display: flex ;
+  width: 100%;
+  /* display: flex;*/
+  flex-flow: row nowrap;
+
+}
+.new_ticket_form form{
+  width: 100vh;
+}
+.finance_div{
+  /* width: 80vw;
+  margin:auto; */
+  min-height: 100%; 
+  /* display: flex; */
+  flex-flow: row nowrap;
+  /* display: flex; */
+  background-image: url("./resources/finance_image.jpg")
+}
+.table-80s{
+  width: 80vw !important;
+  margin:auto;
+}

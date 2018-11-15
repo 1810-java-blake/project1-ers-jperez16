@@ -1,0 +1,46 @@
+body{
+    background-color: beige;
+    font-size: 20px;
+    box-sizing: border-box;
+    background-image: url("./resources/login.png");
+    background-repeat: no-repeat;
+    /* content: url("https://png.pngtree.com/back_origin_pic/00/04/82/2c9d50166026f28ee86abb544b08586d.jpg"); */
+}
+img{
+    width: 80px;
+    /* float: right; */
+    content: url("https://3g4d13k75x47q7v53surz1gi-wpengine.netdna-ssl.com/wp-content/themes/revature/imgs/logo.png")
+}
+label{
+    color: white;
+}
+h2{
+    color: white;
+    /* margin-bottom: -30px; */
+}
+div{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+form{
+    margin-top: 60px;
+
+}
+
+#submit_login{
+    margin-top: 10px;
+    border-radius: 5px;
+    /* font-size: 20px; */
+}
+#submit_login:hover{
+    background-color: 	#1E90FF;
+    color:white;
+}
+
+#username_label input{
+    margin-bottom: 10px;
+}
+#password_label input{
+    margin-bottom: 10px;
+}
