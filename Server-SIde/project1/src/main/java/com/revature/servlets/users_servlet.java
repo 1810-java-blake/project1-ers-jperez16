@@ -15,8 +15,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.revature.utilities.*;
+
+import jdk.internal.jline.internal.Log;
+
 import com.revature.daos.Users;
+import com.revature.daos.login;
 import com.revature.baseclasses.usersbaseclass;
+import org.apache.log4j.Logger;
 
 import org.json.JSONObject;
 
@@ -24,6 +29,9 @@ public class users_servlet  extends HttpServlet{
 	private UUIDHelper uuidHelper  = UUIDHelper.uuidHelper;
 	private ObjectMapper om = new ObjectMapper();
 	private Users users = Users.instance;
+	private login logging = login.instance;
+	private Logger log = Logger.getRootLogger();
+
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,7 +74,6 @@ public class users_servlet  extends HttpServlet{
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req);
 		try {
 			resp.addHeader("Content-Type", "application/json");
 			resp.addHeader("MIME", "application/json");
@@ -74,13 +81,13 @@ public class users_servlet  extends HttpServlet{
 			resp.addHeader("Access-Control-Allow-Credentials" , "true");
 			resp.addHeader("Access-Control-Allow-Methods","POST,PUT");
 			JSONObject encodedResponse = new JSONObject (req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+			log.info("User with auth: " + encodedResponse.getString("auth") + " is changing the status of the reimbursement ID: " + encodedResponse.getString("reimb_id"));
 			users.changeStatus(
 					encodedResponse.getString("auth"),
 					encodedResponse.getInt("newStatus"),
 					Integer.parseInt(encodedResponse.getString("reimb_id")),
 					encodedResponse.getInt("resolvedBy")
 					);
-			System.out.println(encodedResponse);
 			resp.setStatus(200);
 
 		}catch(Exception error) {

@@ -1,0 +1,13 @@
+created_by: Jose Perez
+build_release: none-production
+
+
+db_url: localhost
+db_name: ERP
+db_schema: erp
+db_port: 5432
+  
+
+db_username: seal
+db_password: Coraline3!@#
+

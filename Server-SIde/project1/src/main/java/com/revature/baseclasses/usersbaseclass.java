@@ -4,112 +4,36 @@ import java.sql.Timestamp;
 import com.revature.daos.Users;
 
 
-/*
- * reimbursement:
- * reiumburse ID <this should go to to reimbusement status> *
- * amount
- * submitted
- * resolved
- * description
- * receipt 
- * resolver
- * status id
- * type id
- * 
- * user id <<
- * username << 
- * user password << 
- * first name << 
- * last name <<
- * email <<
- * user role id <goes to user role name which is varchar 20>
- * 
- * reimbursement status id *
- * reimbursement status
- * 
- * reimbursement type id *
- * reimbursement type <<
- * 
- * user role ID
- * user role
- * */
-
-
 public class usersbaseclass{
-	private int userID;
-	private String username;
-	private String email;
 	private String firstName;
 	private String lastName;
-	private String submitted;
-	private String resolved;
+	private String email;
+	private int userID;
+	private String userRole;
 	private int reimbursementID;
 	private double reimbursementAmount;
-	
-	private String userRole;
-	private String reimbursementStatus;
-	private String reimbursementType;
+	private String submitted;
+	private String resolved;
 	private String description;
-	
-	
-	
-	// initial constructor to get users and display them in the admin menu
-	public usersbaseclass(int userID, String username, String firstName, String lastName,String email,String userRole ) {
-		this.userID = userID;
-		this.username = username;
+	private String ticketStatus;
+	private String reimbursementType;
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		this.email = email;
-		this.userRole = userRole;
-		
-	}
-
-	
-	public usersbaseclass(
-			int userID, 
-			String username, 
-			String firstName, 
-			String lastName,
-			String email,
-			String userRole, 
-			double amount, 
-			String submitted, 
-			String resolved,
-			String description,String status,String reimbursment_type, int reimburseID) {
-		this.userID = userID;
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.userRole = userRole;
-		this.reimbursementAmount = amount;
-		this.description = description;
-		this.reimbursementStatus = status;
-		this.reimbursementType = reimbursment_type;
-		this.reimbursementID = reimburseID;
-		this.submitted = submitted;
-		this.resolved = resolved;
-		
-	}
-
-
-	public int getUserID() {
-		return userID;
-	}
-
-
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 
@@ -123,44 +47,23 @@ public class usersbaseclass{
 	}
 
 
-	public String getFirstName() {
-		return firstName;
+	public int getUserID() {
+		return userID;
 	}
 
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 
-
-	public String getLastName() {
-		return lastName;
+	public String getUserRole() {
+		return userRole;
 	}
 
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
-	public String getSubmitted() {
-		return submitted;
-	}
-
-
-	public void setSubmitted(String submitted) {
-		this.submitted = submitted;
-	}
-
-
-	public String getResolved() {
-		return resolved;
-	}
-
-
-	public void setResolved(String resolved) {
-		this.resolved = resolved;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 
@@ -184,33 +87,23 @@ public class usersbaseclass{
 	}
 
 
-	public String getUserRole() {
-		return userRole;
+	public String getSubmitted() {
+		return submitted;
 	}
 
 
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+	public void setSubmitted(String submitted) {
+		this.submitted = submitted;
 	}
 
 
-	public String getReimbursementStatus() {
-		return reimbursementStatus;
+	public String getResolved() {
+		return resolved;
 	}
 
 
-	public void setReimbursementStatus(String reimbursementStatus) {
-		this.reimbursementStatus = reimbursementStatus;
-	}
-
-
-	public String getReimbursementType() {
-		return reimbursementType;
-	}
-
-
-	public void setReimbursementType(String reimbursementType) {
-		this.reimbursementType = reimbursementType;
+	public void setResolved(String resolved) {
+		this.resolved = resolved;
 	}
 
 
@@ -224,114 +117,103 @@ public class usersbaseclass{
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(reimbursementAmount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + reimbursementID;
-		result = prime * result + ((reimbursementStatus == null) ? 0 : reimbursementStatus.hashCode());
-		result = prime * result + ((reimbursementType == null) ? 0 : reimbursementType.hashCode());
-		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
-		result = prime * result + userID;
-		result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public String getTicketStatus() {
+		return ticketStatus;
 	}
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		usersbaseclass other = (usersbaseclass) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (Double.doubleToLongBits(reimbursementAmount) != Double.doubleToLongBits(other.reimbursementAmount))
-			return false;
-		if (reimbursementID != other.reimbursementID)
-			return false;
-		if (reimbursementStatus == null) {
-			if (other.reimbursementStatus != null)
-				return false;
-		} else if (!reimbursementStatus.equals(other.reimbursementStatus))
-			return false;
-		if (reimbursementType == null) {
-			if (other.reimbursementType != null)
-				return false;
-		} else if (!reimbursementType.equals(other.reimbursementType))
-			return false;
-		if (resolved == null) {
-			if (other.resolved != null)
-				return false;
-		} else if (!resolved.equals(other.resolved))
-			return false;
-		if (submitted == null) {
-			if (other.submitted != null)
-				return false;
-		} else if (!submitted.equals(other.submitted))
-			return false;
-		if (userID != other.userID)
-			return false;
-		if (userRole == null) {
-			if (other.userRole != null)
-				return false;
-		} else if (!userRole.equals(other.userRole))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public void setTicketStatus(String ticketStatus) {
+		this.ticketStatus = ticketStatus;
 	}
 
 
+	public String getReimbursementType() {
+		return reimbursementType;
+	}
+
+
+	public void setReimbursementType(String reimbursementType) {
+		this.reimbursementType = reimbursementType;
+	}
+
+
+	public String getResolvedByFirstName() {
+		return resolvedByFirstName;
+	}
+
+
+	public void setResolvedByFirstName(String resolvedByFirstName) {
+		this.resolvedByFirstName = resolvedByFirstName;
+	}
+
+
+	public String getResolvedByLastName() {
+		return resolvedByLastName;
+	}
+
+
+	public void setResolvedByLastName(String resolvedByLastName) {
+		this.resolvedByLastName = resolvedByLastName;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	private String resolvedByFirstName;
+	private String resolvedByLastName;
+	private String userName;
+	
+
+
+	public usersbaseclass(int userID, String userName, String firstName, String lastName, String email, String userRole) {
+		this.userID = userID;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.userRole = userRole;
+	}
+	
+	
+	public usersbaseclass(String firstName, String lastName, String email, int userID, String userRole,
+			int reimbursementID, double reimbursementAmount, String submitted, String resolved, String description,
+			String ticketStatus, String reimbursementType, String resolvedByFirstName, String resolvedByLastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.userID = userID;
+		this.userRole = userRole;
+		this.reimbursementID = reimbursementID;
+		this.reimbursementAmount = reimbursementAmount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
+		this.ticketStatus = ticketStatus;
+		this.reimbursementType = reimbursementType;
+		this.resolvedByFirstName = resolvedByFirstName;
+		this.resolvedByLastName = resolvedByLastName;
+	}
+
+	
+	
 	@Override
 	public String toString() {
-		return "usersbaseclass [userID=" + userID + ", username=" + username + ", email=" + email + ", firstName="
-				+ firstName +  ", lastName=" + lastName + ", submitted=" + submitted
-				+ ", resolved=" + resolved + ", reimbursementID=" + reimbursementID + ", reimbursementAmount="
-				+ reimbursementAmount + ", userRole=" + userRole + ", reimbursementStatus=" + reimbursementStatus
-				+ ", reimbursementType=" + reimbursementType + ", description=" + description + "]";
+		return "usersbaseclass [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", userID="
+				+ userID + ", userRole=" + userRole + ", reimbursementID=" + reimbursementID + ", reimbursementAmount="
+				+ reimbursementAmount + ", submitted=" + submitted + ", resolved=" + resolved + ", description="
+				+ description + ", ticketStatus=" + ticketStatus + ", reimbursementType=" + reimbursementType
+				+ ", resolvedByFirstName=" + resolvedByFirstName + ", resolvedByLastName=" + resolvedByLastName + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

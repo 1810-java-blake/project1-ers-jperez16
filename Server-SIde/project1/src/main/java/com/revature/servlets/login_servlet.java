@@ -29,6 +29,7 @@ import com.revature.baseclasses.LogIn;
 import com.revature.daos.login;
 import com.revature.baseclasses.usersbaseclass;
 import com.revature.daos.Users;
+import org.apache.log4j.Logger;
 
 public class login_servlet extends HttpServlet{
 	private ObjectNode node = JsonNodeFactory.instance.objectNode();
@@ -36,6 +37,7 @@ public class login_servlet extends HttpServlet{
 	private ObjectMapper error = new ObjectMapper();
 	private login logging = login.instance;
 	private Users u = Users.instance;
+	private Logger log = Logger.getRootLogger();
 
 	
 	@Override
@@ -53,18 +55,18 @@ public class login_servlet extends HttpServlet{
 		JSONObject encodedResponse = new JSONObject (req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		
 		LocalDate localtime = java.time.LocalDate.now();
-		System.out.println(localtime);
 		if(encodedResponse.has("data")) {
 			try {
 				ObjectMapper om = new ObjectMapper();
 				JSONObject decodedResponse = new JSONObject(new String(Base64.getDecoder().decode(encodedResponse.getString("data"))));
-				System.out.println(decodedResponse);
+//				System.out.println(decodedResponse);
 				List<LogIn> users = logging.getUser(
 						decodedResponse.getString("username"), 
 						decodedResponse.getString("password")
 						);
 				if(users == null) {
-					System.out.println("users was null");
+					
+					log.warn("IP Address that failed to authenticate " + req.getRemoteAddr());
 					node.removeAll();
 				
 					node.put("success", 1);
@@ -74,26 +76,28 @@ public class login_servlet extends HttpServlet{
 				}
 				else {
 					UUID uid = UUID.randomUUID();
+					log.info("User: " + users.get(0).getEmail() + " logged in successfully");
+					log.info("User was given an authentication token consisting of: " + uid.toString());
 					node.removeAll();
 					node.put("success", "0");
 					node.put("auth",uid.toString());
 					node.put("results", new ObjectMapper().readTree(om.writeValueAsString(users)));
 					logging.save_sessiod(uid, users.get(0).getEmail());
-					System.out.println(users.get(0).getRoleID());
 					if(users.get(0).getRoleID() == 2) {
+						log.info("Returning tickets for the user containing authentication id " + uid.toString());
 						List<usersbaseclass> ubc = u.getUser(users.get(0).getEmail(), uid.toString());
 						node.put("resultsData", new ObjectMapper().readTree(om.writeValueAsString(ubc)));
 					}
 					if(users.get(0).getRoleID() == 3) {
+						log.info("Returning all the tickets for the financial manager  containing authentication id " + uid.toString());
 						List<usersbaseclass> ubc = u.getAllTickets();
 						node.put("resultsData", new ObjectMapper().readTree(om.writeValueAsString(ubc)));
 					}
-
+					String vals = om.writeValueAsString(node);
+					log.info("Sending payload");
+					log.info(vals);
 					
-					
-					
-					System.out.println(om.writeValueAsString(node));
-					resp.getWriter().write(om.writeValueAsString(node));
+					resp.getWriter().write(vals);
 					
 				}
 				

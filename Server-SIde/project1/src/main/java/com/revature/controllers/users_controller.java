@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import com.revature.baseclasses.usersbaseclass;
 import com.revature.daos.Users;
@@ -16,6 +16,7 @@ import com.revature.daos.Users;
 import com.revature.utilities.DriverManagerConnector;
 
 public class users_controller implements Users{
+	private Logger log = Logger.getRootLogger();
 
 	@Override
 	public List<usersbaseclass> getUsers() {
@@ -36,23 +37,12 @@ public class users_controller implements Users{
 							results.getString("user_role")
 							));
 				}while(results.next());
+				log.info("returning users: " + users.toString());
 				return users;
 			}
 		}catch(Exception error) {
 			error.printStackTrace();
 		}
-		return null;
-	}
-
-	@Override
-	public List<usersbaseclass> resetPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Boolean ticketStatus() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -68,6 +58,7 @@ public class users_controller implements Users{
 
 				do {
 					if(results.getString("ers_user_uuid") != null && results.getString("ers_user_uuid").equals(auth)) {
+						log.info("User with auth " + auth +  " successfully authenticated");
 						return true;
 					}
 
@@ -77,6 +68,7 @@ public class users_controller implements Users{
 			error.printStackTrace();
 			return false;
 		}
+		log.info("Auth " + auth + "failed to authenticate");
 		return false;
 		
 	}
@@ -93,27 +85,24 @@ public class users_controller implements Users{
 			List<usersbaseclass> user = new ArrayList<>();
 			if(results.next()) {
 				do {
-					System.out.println(results.getString("submitted").getClass().getName());
-					System.out.println(results.getString("submitted"));
 					user.add(new usersbaseclass(
-							results.getInt("userID"),
-							results.getString("displayname"),
 							results.getString("firstName"),
 							results.getString("lastName"),
 							results.getString("email"),
+							results.getInt("userID"),
 							results.getString("userRole"),
+							results.getInt("reimbursementID"),
 							results.getDouble("amount"),
 							results.getString("submitted"),
 							results.getString("resolved"),
 							results.getString("description"),
 							results.getString("status"),
 							results.getString("reimbursement_type"),
-							results.getInt("reimbursementID")
-							
+							results.getString("resolvedByFirstName"),
+							results.getString("resolvedByLastName")
 							));
 					
 				}while(results.next());
-				System.out.println(user.toString());
 				return user;
 			}
 
@@ -137,20 +126,20 @@ public class users_controller implements Users{
 				List<usersbaseclass> users = new ArrayList<>();
 				do {
 					users.add(new usersbaseclass(
-							results.getInt("userID"),
-							results.getString("displayname"),
-							results.getString("firstName"),
-							results.getString("lastName"),
+							results.getString("firstname"),
+							results.getString("lastname"),
 							results.getString("email"),
-							results.getString("userRole"),
+							results.getInt("userid"),
+							results.getString("userrole"),
+							results.getInt("reimbursementid"),
 							results.getDouble("amount"),
 							results.getString("submitted"),
 							results.getString("resolved"),
 							results.getString("description"),
 							results.getString("status"),
 							results.getString("reimbursement_type"),
-							results.getInt("reimbursementID")
-							
+							results.getString("resolvedbyfirstname"),
+							results.getString("resolvedbylastname")
 							));
 				}while(results.next());
 				return users;
@@ -173,6 +162,7 @@ public class users_controller implements Users{
 			statement.setInt(3, reimbursementID);
 			statement.setInt(4, resolvedBy);
 			statement.execute();
+			
 			return true;
 			
 		} catch (SQLException e) {
